@@ -96,17 +96,24 @@ const getFollowing = (user_id, count = MAX_FOLLOWERS, next_max_id = "") => {
 
 const getUserFriendshipStats = async (username) => {
   console.clear();
-
+  if (!username || typeof username !== 'string' || !username.trim()) {
+    console.clear();
+    console.log("PLEASE ENTER USERNAME");
+    return {data:"No username, no data"};
+  }
+  
   const user_id = await getUserId(username);
   if (!user_id) {
     throw new Error(`Could not find a user with the username ${username}`);
   }
 
-  console.log(`LOADING FOLLOWERS...`);
-  const followers = await getFollowers(user_id);
-  console.log(`LOADING FOLLOWING...`);
-  const following = await getFollowing(user_id);
+  console.log(`LOADING FOLLOWERS AND FOLLOWING...`);
+  const [followers, following] = await Promise.all([
+    getFollowers(user_id),
+    getFollowing(user_id),
+  ]);
   
+  console.log(`FOLLOWERS AND FOLLOWING LOADED`);
   const followersUsernames = followers.map((follower) => follower.username.toLowerCase()).sort();
   const followingUsernames = following.map((followed) => followed.username.toLowerCase()).sort();
   const followerSet = new Set(followersUsernames);
@@ -131,5 +138,6 @@ const getUserFriendshipStats = async (username) => {
 };
 // Your instagram account name in quotation marks
 getUserFriendshipStats("").then((data) => {
+if(data)
   console.log(data);
 });
