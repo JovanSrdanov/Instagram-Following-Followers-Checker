@@ -1,5 +1,5 @@
 # Instagram Following-Followers Checker
-This script allows you to compare sets of followers and following on Instagram to gain insights into your account activity. Please follow these steps:
+This script written in JavaScript allows you to compare sets of followers and following on Instagram to gain insights into your account activity. Please follow these steps:
 
 >[!CAUTION]
 >Avoid running this script repeatedly in rapid succession, as Instagram may impose a temporary restriction on your requests due to rate limiting.
