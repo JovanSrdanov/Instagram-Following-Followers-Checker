@@ -137,7 +137,7 @@ const getUserFriendshipStats = async (username) => {
 };
 
 // Your Instagram account name in quotation marks
-getUserFriendshipStats("jovansrdanov2000")
+getUserFriendshipStats("")
   .then((data) => {
       if (data) {
           console.log("All is good, you can check your data now!");
